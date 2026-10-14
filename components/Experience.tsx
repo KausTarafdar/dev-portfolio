@@ -1,4 +1,5 @@
 import { experience } from "@/data/content";
+import Bullet from "./Bullet";
 import Squiggle from "./Squiggle";
 
 export default function Experience() {
@@ -38,7 +39,7 @@ export default function Experience() {
                 <div className="stack-line">{project.stack.join(" / ")}</div>
                 <ul className="bullets">
                   {project.bullets.map((b) => (
-                    <li key={b}>{b}</li>
+                    <Bullet key={b} text={b} />
                   ))}
                 </ul>
               </div>

@@ -476,6 +476,12 @@ p {
   color: var(--fg-dimmer);
 }
 
+.bullets .metric {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
 /* projects page reuses job-company/project styles with top-level layout */
 
 .standalone-project {

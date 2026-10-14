@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { projects } from "@/data/content";
+import Bullet from "./Bullet";
 import Squiggle from "./Squiggle";
 
 export default function Projects() {
@@ -30,7 +31,7 @@ export default function Projects() {
           <div className="stack-line">{project.stack.join(" / ")}</div>
           <ul className="bullets">
             {project.bullets.map((b) => (
-              <li key={b}>{b}</li>
+              <Bullet key={b} text={b} />
             ))}
           </ul>
         </div>

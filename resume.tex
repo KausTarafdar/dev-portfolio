@@ -1,0 +1,126 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.38in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{newtxtext,newtxmath}
+\pagestyle{empty}
+\setlist[itemize]{leftmargin=*,nosep}
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
+\titlespacing{\section}{0pt}{0.5em}{0.25em}
+
+\hypersetup{
+    pdftitle={Kaustav Tarafdar - Resume},
+    pdfauthor={Kaustav Tarafdar},
+    pdfsubject={Backend and AI Infrastructure Engineer}
+}
+
+% ATS-safe heading: plain text line, no tabular.
+% Renders as "Title, Company - domain <fill> Dates"
+\newcommand{\experience}[5]{
+    \vspace{0.25em}
+    \noindent\textbf{#2}, #1 \; \href{#4}{\small #5} \hfill #3\par
+    \vspace{0.1em}
+}
+
+\newcommand{\project}[2]{
+    \vspace{0.25em}
+    \noindent\textbf{#1} \hfill \href{#2}{GitHub}\par
+    \vspace{0.1em}
+}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries Kaustav Tarafdar}\\[0.15em]
+\href{mailto:kaustarafdar@gmail.com}{kaustarafdar@gmail.com} $\cdot$
++91 6290050863 $\cdot$
+\href{https://linkedin.com/in/kaustav-tarafdar}{linkedin.com/in/kaustav-tarafdar} $\cdot$
+\href{https://github.com/KausTarafdar}{github.com/KausTarafdar}
+\end{center}
+
+\vspace{0.15em}
+\noindent\textbf{Backend \& AI Infrastructure Engineer} - 2 years building distributed systems, ML inference infrastructure and multi-tenant SaaS platforms in Python and TypeScript. Scaled GPU inference to 50 requests/sec across 10 nodes, cut inference latency 200x, and owned the backend for a consumer app launch to 80K users as the second engineer on a founding team.
+
+\section*{Work Experience}
+
+\experience
+{TechyMonks}
+{Software Engineer}
+{Feb 2026 -- Present}
+{https://www.techymonks.com/}
+{techymonks.com}
+
+\begin{itemize}[leftmargin=*,nosep]
+\item \textbf{Led the v2 re-architecture} of a wholesale deal-evaluation platform (Node.js, TypeScript, PostgreSQL), migrating to a Controller-Service-Repository pattern, normalizing a fragmented schema and eliminating N+1 queries.
+\item \textbf{Launched the platform's affiliate revenue channel} end-to-end, automating commission tracking through Stripe webhooks and replacing manual payout handling with saved banking details, autopay and bulk admin approvals.
+\item \textbf{Architected an HVAC lead-conversion backend} so tenants could keep running on their existing CRM, integrating 3 providers (ServiceTitan, CallTrackingMetrics, GoHighLevel) over a polling and webhook pipeline with PostgreSQL schema-per-tenant isolation.
+\item \textbf{Owned the mobile sales-app backend} serving field reps their daily appointments, AI call summaries and geo-fenced arrival alerts, plus Twilio masked calling and an LLM agent for company analytics.
+\item \textbf{Replaced manual salon bookings} with a multi-tenant FastAPI platform driving a webhook-based WhatsApp bot over Redis, PostgreSQL and S3, with LangChain campaign generation and customer-insight engines on Gemini and OpenAI.
+\item \textbf{Built CI/CD from scratch} with GitHub Actions, replacing manual releases with isolated dev/stage/prod pipelines sequencing build, migrate and deploy behind ESLint/TypeScript gates and New Relic/Papertrail observability.
+\end{itemize}
+
+\experience
+{Yonder Wonder AI}
+{Software Engineer, Founding Team}
+{Mar 2025 -- Feb 2026}
+{https://yonderwonder.ai/}
+{yonderwonder.ai}
+
+\begin{itemize}[leftmargin=*,nosep]
+\item \textbf{Architected a distributed GPU inference platform} across 10 GPU VMs (160GB VRAM) using FastAPI, Redis RQ and Docker, supporting 40 concurrent video runs at peak load of 50 requests/sec; cut idle GPU spend by reaping orphaned processes on client disconnect.
+\item \textbf{Cut per-image inference from 2s to $\sim$0.01s (200x)} by profiling model timings and removing redundant image-to-byte conversions; extended codec support to 7 formats via ffmpeg and H.264 handling.
+\item \textbf{Replaced a Flask monolith} with an async FastAPI queue and ML-worker architecture on Redis RQ with dead-letter queues, and led the GCP to Azure migration including Azure Blob Storage.
+\item \textbf{Diagnosed a production memory leak} with GNU Debugger - a PyTorch pointer deallocation across shared threads - eliminating runtime crashes as the platform scaled to 5,000 users.
+\item \textbf{Sole backend owner of WeClick}: authentication, in-app credits with iOS/Android payment SDKs, and autoscaling inference workers on Azure Container Apps for an 80K-user launch; cut deploys from 10 min to 2 min.
+\end{itemize}
+
+\experience
+{Agetware}
+{Backend Engineer Intern}
+{Nov 2024 -- Feb 2025}
+{https://www.agetware.com/}
+{agetware.com}
+
+\begin{itemize}[leftmargin=*,nosep]
+\item \textbf{Built a job application management system end-to-end} for a music-school client: a state machine covering submission, interview scheduling and hire, with AWS S3 uploads for resumes, videos and photos.
+\item \textbf{Integrated Google Calendar scheduling and WhatsApp notifications} for applicants and interviewers, replacing a manual hiring workflow.
+\item \textbf{Streamlined class scheduling} in the admin dashboard, replacing a multi-step Google Calendar workflow with one-click student-to-class assignment.
+\end{itemize}
+
+\section*{Projects}
+
+\project
+{API Gateway}
+{https://github.com/KausTarafdar/Arbitor}
+
+\begin{itemize}[leftmargin=*,nosep]
+\item Built a self-hosted API gateway with service discovery, consistent-hash load balancing, health-aware failover and dynamic routing; added authentication, structured logging, Docker deployment and 30+ unit and integration tests.
+\end{itemize}
+
+\project
+{URL Shortener}
+{https://github.com/KausTarafdar/pocket-url}
+
+\begin{itemize}[leftmargin=*,nosep]
+\item Built a URL shortening platform supporting custom aliases, QR generation and click analytics with frequency and recency tracking in PostgreSQL.
+\end{itemize}
+
+\section*{Education}
+\noindent\textbf{B.Tech in Computer Science \& Engineering}, MAKAUT (FIEM), Kolkata \hfill 2021--2025
+
+\section*{Technical Skills}
+\begin{itemize}[leftmargin=*,nosep]
+\item \textbf{Languages:} Python, TypeScript, JavaScript, SQL, Bash
+\item \textbf{Backend:} FastAPI, Django, Flask, Node.js, Express.js, GraphQL, REST APIs, WebSockets
+\item \textbf{Databases:} PostgreSQL, Redis, MongoDB, Supabase, Database Design \& Normalization
+\item \textbf{AI/ML:} LangChain, OpenAI, Gemini, PyTorch, GPU Orchestration, Model Inference Pipelines
+\item \textbf{Cloud:} AWS (S3, EC2), Azure (Container Apps, Blob Storage), GCP, Heroku, Fly.io
+\item \textbf{DevOps:} Docker, GitHub Actions, CI/CD, Git, Nginx, Linux, Monitoring \& Observability (New Relic, Papertrail), Unit \& Integration Testing
+\item \textbf{Architecture:} Distributed Systems, System Design, API Design, Microservices, Event-Driven Architecture, Message Queues (Redis RQ, BullMQ, Celery), Multi-Tenancy, Domain-Driven Design, Scalability, Performance Optimization
+\item \textbf{Integrations:} Stripe, Twilio, WhatsApp/Meta APIs, REST, Webhooks, OAuth
+\item \textbf{Practices:} Technical Documentation, Code Review, Cross-Functional Collaboration
+\end{itemize}
+
+\end{document}

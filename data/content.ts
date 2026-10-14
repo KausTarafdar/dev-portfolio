@@ -146,7 +146,7 @@ export const experience: Job[] = [
   },
   {
     company: "Yonder Wonder AI",
-    url: "https://yonderwonder.ai/",
+    url: "https://www.yonderwonder.ai/index.html",
     role: "Software Engineer, Founding Team",
     dates: "Mar 2025 — Feb 2026",
     location: "Remote",
@@ -154,6 +154,7 @@ export const experience: Job[] = [
     projects: [
       {
         name: "Face Effects",
+        url: "https://www.yonderwonder.ai",
         summary: "VFX product that ages and de-ages faces in images and video with in-house GAN models.",
         stack: ["FastAPI", "Redis RQ", "Docker", "PyTorch", "Azure", "ffmpeg"],
         headline: { value: "200x", label: "faster inference, 2s to 0.01s" },
@@ -176,6 +177,7 @@ export const experience: Job[] = [
       },
       {
         name: "WeClick",
+        url: "https://www.yonderwonder.ai/weclick.html",
         summary: "Group-photo app on iOS and Android that puts you in a photo with anyone.",
         stack: ["FastAPI", "Supabase", "Azure Container Apps", "Flux-fill", "OpenCV"],
         headline: { value: "80K", label: "users at launch" },

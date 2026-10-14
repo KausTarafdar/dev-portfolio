@@ -21,7 +21,7 @@ export default function CaseCard({ project }: { project: Project }) {
         )}
         {project.url && (
           <a className="case-link" href={project.url} target="_blank" rel="noreferrer">
-            Source ↗
+            {project.url.includes("github.com") ? "Source" : "Visit"} ↗
           </a>
         )}
       </header>

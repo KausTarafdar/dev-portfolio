@@ -25,6 +25,7 @@ export const profile = {
   blurb:
     "i build backends, ml inference infrastructure, and multi-tenant systems that stay up when the traffic does not behave.",
   kicker: "powered by curiosity, caffeine, and a very long log tail.",
+  location: "India (GMT+5:30)",
   footerLeft: "backend / infra / ai",
   footerRight: "2 years of shipping things that scale.",
 };

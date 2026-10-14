@@ -22,6 +22,9 @@ export default function About() {
           .
         </p> */}
         <p>{profile.blurb}</p>
+        <p>
+          based in <span className="highlight">{profile.location}</span>.
+        </p>
         <p>{profile.kicker}</p>
       </div>
       <pre className="ascii">{ASCII}</pre>

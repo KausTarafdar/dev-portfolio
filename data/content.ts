@@ -29,7 +29,8 @@ export const profile = {
   title: "Backend & AI Infrastructure Engineer",
   current: { company: "TechyMonks", url: "https://www.techymonks.com/" },
   focus: "Distributed Systems",
-  blurb: "Distributed backends, ML inference pipelines and multi-tenant systems that stay up under load.",
+  blurb: "I build GPU inference platforms and multi-tenant backends that hold up at 80K users.",
+  availability: "Open to backend and AI infra roles",
   kicker: "Fueled by curiosity and a very long log tail.",
   location: "India (GMT+5:30)",
   footerLeft: "backend / infra / ai",
@@ -37,11 +38,11 @@ export const profile = {
 };
 
 export const metrics = [
+  { value: "80K", label: "users at launch, sole backend owner on WeClick" },
+  { value: "200x", label: "faster per-image inference, 2s to 0.01s on Face Effects" },
+  { value: "50/s", label: "peak requests across 10 GPU VMs (160GB VRAM)" },
+  { value: "5x", label: "faster deploys, 10 min to 2 min on WeClick" },
   { value: "2 yrs", label: "shipping production backends" },
-  { value: "80K", label: "users launched to" },
-  { value: "50/s", label: "peak requests, GPU inference" },
-  { value: "200x", label: "faster per-image inference" },
-  { value: "10", label: "GPU VMs orchestrated" },
 ];
 
 export const socials = [

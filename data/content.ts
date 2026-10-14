@@ -30,6 +30,13 @@ export const profile = {
   footerRight: "2 years of shipping things that scale.",
 };
 
+export const metrics = [
+  { value: "80K", label: "users shipped to" },
+  { value: "200x", label: "faster inference" },
+  { value: "10", label: "GPU VMs orchestrated" },
+  { value: "5x", label: "faster deploys" },
+];
+
 export const socials = [
   { label: "email", href: "mailto:kaustarafdar@gmail.com" },
   { label: "github", href: "https://github.com/KausTarafdar" },

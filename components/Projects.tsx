@@ -1,13 +1,18 @@
+import Link from "next/link";
 import { projects } from "@/data/content";
 import Squiggle from "./Squiggle";
 
 export default function Projects() {
   return (
     <section>
-      <div className="breadcrumb">~/projects</div>
+      <div className="breadcrumb">~/side-projects</div>
       <h2 className="section-title">
-        what I&apos;ve <span className="accent-word">built<Squiggle /></span>
+        side <span className="accent-word">projects<Squiggle /></span>
       </h2>
+      <p className="section-intro">
+        Personal projects, built outside of work. For the production systems I&apos;ve shipped,
+        see <Link href="/experience">experience</Link>.
+      </p>
 
       {projects.map((project) => (
         <div className="standalone-project" key={project.name}>

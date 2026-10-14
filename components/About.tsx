@@ -1,4 +1,4 @@
-import { profile } from "@/data/content";
+import { metrics, profile } from "@/data/content";
 
 const ASCII = String.raw`
     /\_/\
@@ -13,19 +13,31 @@ export default function About() {
       <h1 className="hero">
         hey, i&apos;m {profile.handle}.<span className="cursor" />
       </h1>
+      <div className="identity">
+        <span className="identity-name">{profile.name}</span>
+        <span className="identity-title">{profile.title}</span>
+      </div>
       <div className="about-copy">
-        {/* <p>
+        <p>
           right now, i&apos;m building <span className="highlight">{profile.focus}</span> at{" "}
           <a className="company" href={profile.current.url} target="_blank" rel="noreferrer">
             {profile.current.company}
           </a>
           .
-        </p> */}
+        </p>
         <p>{profile.blurb}</p>
         <p>
           based in <span className="highlight">{profile.location}</span>.
         </p>
         <p>{profile.kicker}</p>
+      </div>
+      <div className="metrics-grid">
+        {metrics.map((m) => (
+          <div className="metric" key={m.label}>
+            <div className="metric-value">{m.value}</div>
+            <div className="metric-label">{m.label}</div>
+          </div>
+        ))}
       </div>
       <pre className="ascii">{ASCII}</pre>
       <div className="about-footer">

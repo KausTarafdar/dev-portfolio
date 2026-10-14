@@ -1,37 +1,33 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { socials } from "@/data/content";
 
-export type Section = "about" | "experience" | "projects" | "education";
-
-const NAV: { id: Section; label: string; sigil: string }[] = [
-  { id: "about", label: "about", sigil: "~" },
-  { id: "experience", label: "experience", sigil: ">" },
-  { id: "projects", label: "projects", sigil: "+" },
-  { id: "education", label: "education", sigil: "#" },
+const NAV = [
+  { href: "/", label: "about", sigil: "~" },
+  { href: "/experience", label: "experience", sigil: ">" },
+  { href: "/projects", label: "side projects", sigil: "+" },
+  { href: "/education", label: "education", sigil: "#" },
 ];
 
-export default function Sidebar({
-  active,
-  onChange,
-}: {
-  active: Section;
-  onChange: (section: Section) => void;
-}) {
+export default function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <nav className="sidebar">
       <div>
         <div className="sidebar-dots">. . . . . . .</div>
         <ul className="nav-list">
           {NAV.map((item) => (
-            <li key={item.id}>
-              <button
-                className={`nav-item${active === item.id ? " active" : ""}`}
-                onClick={() => onChange(item.id)}
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`nav-item${pathname === item.href ? " active" : ""}`}
               >
                 <span className="nav-sigil">{item.sigil}</span>
                 {item.label}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>

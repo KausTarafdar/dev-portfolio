@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import Shell from "@/components/Shell";
 import "./globals.css";
+
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
 
 const mono = JetBrains_Mono({
   subsets: ["latin"],
@@ -16,8 +23,23 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kaustav Tarafdar",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Kaustav Tarafdar — Backend & AI Infrastructure Engineer",
+    template: "%s — Kaustav Tarafdar",
+  },
   description: "Backend & AI infrastructure engineer. Distributed systems, ML inference, multi-tenant SaaS.",
+  openGraph: {
+    title: "Kaustav Tarafdar — Backend & AI Infrastructure Engineer",
+    description: "Backend & AI infrastructure engineer. Distributed systems, ML inference, multi-tenant SaaS.",
+    url: siteUrl,
+    siteName: "Kaustav Tarafdar",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kaustav Tarafdar — Backend & AI Infrastructure Engineer",
+    description: "Backend & AI infrastructure engineer. Distributed systems, ML inference, multi-tenant SaaS.",
+  },
 };
 
 const THEME_SCRIPT = `
@@ -39,7 +61,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body className={`${mono.variable} ${sans.variable}`}>
-        {children}
+        <Shell>{children}</Shell>
         <Analytics />
       </body>
     </html>

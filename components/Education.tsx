@@ -1,4 +1,4 @@
-import { education, skills } from "@/data/content";
+import { education } from "@/data/content";
 import Squiggle from "./Squiggle";
 
 export default function Education() {
@@ -17,18 +17,6 @@ export default function Education() {
         <div className="edu-school">{education.school}</div>
         <div className="edu-degree">{education.degree}</div>
         <p className="edu-note">{education.note}</p>
-      </div>
-
-      <div>
-        <div className="skills-title">Things I build with</div>
-        <div className="skills-grid">
-          {skills.map((group) => (
-            <div key={group.group}>
-              <div className="skill-group-name">{group.group}</div>
-              <div className="skill-items">{group.items.join(", ")}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

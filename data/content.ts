@@ -1,8 +1,15 @@
+export type ArchNode = {
+  label: string;
+  kind: "edge" | "queue" | "compute" | "store";
+};
+
 export type Project = {
   name: string;
   url?: string;
   summary: string;
   stack: string[];
+  headline?: { value: string; label: string };
+  arch?: ArchNode[];
   bullets: string[];
 };
 
@@ -22,8 +29,7 @@ export const profile = {
   title: "Backend & AI Infrastructure Engineer",
   current: { company: "TechyMonks", url: "https://www.techymonks.com/" },
   focus: "Distributed Systems",
-  blurb:
-    "I design distributed backends, ML inference pipelines, and multi-tenant architectures built to stay up when traffic spikes. Focused on clean domain boundaries, high throughput, and fault tolerance.",
+  blurb: "Distributed backends, ML inference pipelines and multi-tenant systems that stay up under load.",
   kicker: "Fueled by curiosity and a very long log tail.",
   location: "India (GMT+5:30)",
   footerLeft: "backend / infra / ai",
@@ -31,11 +37,14 @@ export const profile = {
 };
 
 export const metrics = [
-  { value: "80K", label: "users shipped to" },
-  { value: "200x", label: "faster inference" },
+  { value: "2 yrs", label: "shipping production backends" },
+  { value: "80K", label: "users launched to" },
+  { value: "50/s", label: "peak requests, GPU inference" },
+  { value: "200x", label: "faster per-image inference" },
   { value: "10", label: "GPU VMs orchestrated" },
-  { value: "5x", label: "faster deploys" },
 ];
+
+export const featured = ["Face Effects", "WeClick", "Gomotto"];
 
 export const socials = [
   { label: "email", href: "mailto:kaustarafdar@gmail.com" },
@@ -51,60 +60,86 @@ export const experience: Job[] = [
     role: "Software Engineer",
     dates: "Feb 2026 — Present",
     location: "Remote, India",
-    summary:
-      "I work across client platforms as a backend engineer, owning architecture, integrations and delivery pipelines. Most of my time goes to multi-tenant systems, third-party integrations and the CI/CD that keeps them shipping safely.",
+    summary: "Backend engineer owning architecture, integrations and CI/CD across client platforms.",
     projects: [
       {
         name: "Gomotto",
-        summary:
-          "Lead-conversion platform for HVAC companies: a CRM integration and lead state layer, an AI call-analysis layer, and a mobile app for field sales.",
+        summary: "Lead-conversion platform for HVAC companies: CRM sync, AI call analysis, field-sales mobile app.",
         stack: ["Node.js", "TypeScript", "PostgreSQL", "Redis", "Twilio"],
+        headline: { value: "3 CRMs", label: "integrated per tenant" },
+        arch: [
+          { label: "ServiceTitan / CTM / GHL", kind: "edge" },
+          { label: "Poll + webhooks", kind: "queue" },
+          { label: "Node API", kind: "compute" },
+          { label: "Redis", kind: "store" },
+          { label: "Postgres, schema per tenant", kind: "store" },
+        ],
         bullets: [
-          "Architected the backend so tenants could keep their existing CRM, integrating **ServiceTitan, CallTrackingMetrics and GoHighLevel** over an in-house polling and webhook pipeline.",
-          "Led backend design and implementation for the mobile sales app: Redis leaderboards, the day's appointment list, AI call summaries and **Ask Gomotto**, an agent for company stats and analytics.",
-          "Designed a geo-fencing feature that notifies sales reps automatically once they are near their next appointment.",
-          "Built the team management system with an email-invite onboarding flow, plus the first tenant onboarding flow with SOP document ingestion and **agentic configuration**.",
-          "Integrated **Twilio masked calling** through a two-way proxy number pool, and shipped ghost mode so reps' raw call recordings stay private while summaries stay shared.",
-          "Implemented PostgreSQL **schema-per-tenant isolation** for multi-tenancy.",
+          "**Multi-tenant CRM layer.** ServiceTitan, CallTrackingMetrics and GoHighLevel over an in-house polling and webhook pipeline.",
+          "**Schema-per-tenant isolation** in PostgreSQL for hard multi-tenancy.",
+          "**Twilio masked calling** via a two-way proxy number pool, plus ghost mode to keep raw recordings private.",
+          "**Mobile backend.** Redis leaderboards, daily appointments, AI call summaries and Ask Gomotto analytics agent.",
+          "**Geo-fencing** notifies reps when they near their next appointment.",
+          "**Onboarding.** Email-invite team management and SOP ingestion with agentic configuration.",
         ],
       },
       {
         name: "BuyBox Cartel",
         url: "https://www.buyboxcartel.com/",
-        summary:
-          "Deal-evaluation engine for wholesale real estate, plugged into a verified network of cash buyers to answer whether a deal sells, who buys it and at what price.",
+        summary: "Deal-evaluation engine for wholesale real estate, backed by a verified cash-buyer network.",
         stack: ["Node.js", "TypeScript", "PostgreSQL", "Redis", "BullMQ", "Stripe"],
+        headline: { value: "V2", label: "re-architecture, CI/CD from scratch" },
+        arch: [
+          { label: "Client", kind: "edge" },
+          { label: "Controller", kind: "compute" },
+          { label: "Service", kind: "compute" },
+          { label: "Repository", kind: "compute" },
+          { label: "Postgres", kind: "store" },
+        ],
         bullets: [
-          "Led the V2 re-architecture: migrated wholesaler modules to a Controller-Service-Repository pattern, enforced the repository SOP and guards, split the buybox controller and killed **N+1 queries**.",
-          "Launched the **affiliate revenue channel** end-to-end, wiring commission tracking into Stripe webhooks with admin metrics APIs, saved banking details, autopay and bulk withdrawal approvals.",
-          "Built **CI/CD from scratch** in GitHub Actions: isolated dev/stage/prod workflows sequencing build, migrate and deploy behind ESLint and TypeScript gates.",
-          "Hardened observability with Papertrail logging tags, V2 health checks backed by DB statement timeouts, vendor error conventions and Stripe renewal failure tagging.",
-          "Shipped bank-detail caching, subscription extension endpoints and conversion-rate fixes, plus reliability patches that stopped third-party failures from breaking signups.",
+          "**V2 re-architecture.** Controller-Service-Repository, enforced repo SOP and guards, N+1 queries removed.",
+          "**Affiliate revenue channel** shipped end-to-end on Stripe webhooks, with autopay and bulk withdrawals.",
+          "**CI/CD from scratch.** Isolated dev/stage/prod GitHub Actions behind ESLint and TypeScript gates.",
+          "**Observability.** Papertrail tags, V2 health checks with DB statement timeouts, Stripe renewal failure tagging.",
+          "**Reliability.** Bank-detail caching and patches so third-party failures stop breaking signups.",
         ],
       },
       {
         name: "Binance Trade Bot",
-        summary:
-          "Algorithmic crypto futures system that researches, backtests and automates a rules-based strategy, with a live dashboard on top.",
+        summary: "Rules-based crypto futures system with research, backtesting, live execution and dashboard.",
         stack: ["Python", "CCXT", "Supabase", "Next.js", "Docker", "Fly.io"],
+        headline: { value: "10,000+", label: "Monte Carlo simulations" },
+        arch: [
+          { label: "Regime", kind: "compute" },
+          { label: "Setup", kind: "compute" },
+          { label: "Trigger", kind: "compute" },
+          { label: "Risk", kind: "compute" },
+          { label: "Binance / OKX", kind: "edge" },
+        ],
         bullets: [
-          "Designed a modular four-phase pipeline (regime, setup, trigger, risk) shared identically between backtest and live execution to **eliminate backtest-live drift**.",
-          "Built a Monte Carlo risk engine running **10,000+ trade-resampling simulations** (IID, permutation, block bootstrap) to derive drawdown, Calmar and profit-factor distributions.",
-          "Deployed the live bot against Binance and OKX with dry-run and testnet safety modes, Supabase state persistence and containerized Fly.io deployment.",
-          "Authored **25+ analysis scripts** for strategy research, including the evidence that retired an underperforming strategy.",
-          "Built the analytics dashboard visualizing live and historical PnL, positions and trades.",
+          "**Zero backtest-live drift.** One four-phase pipeline (regime, setup, trigger, risk) shared by both.",
+          "**Monte Carlo risk engine.** 10,000+ resamples (IID, permutation, block bootstrap) for drawdown and Calmar distributions.",
+          "**Live deploy** on Binance and OKX with dry-run and testnet modes, Supabase state, Fly.io containers.",
+          "**25+ analysis scripts**, including the evidence that retired a weak strategy.",
+          "**Dashboard** for live and historical PnL, positions and trades.",
         ],
       },
       {
         name: "Linkme",
-        summary:
-          "Multi-tenant platform pairing a WhatsApp booking bot with an AI marketing and customer-intelligence system for salons.",
+        summary: "WhatsApp booking bot plus AI marketing and customer-insight engine for salons.",
         stack: ["FastAPI", "LangChain", "Redis", "PostgreSQL", "S3", "Gemini"],
+        arch: [
+          { label: "WhatsApp", kind: "edge" },
+          { label: "Webhook", kind: "queue" },
+          { label: "FastAPI", kind: "compute" },
+          { label: "LangChain agents", kind: "compute" },
+          { label: "Postgres / Redis / S3", kind: "store" },
+        ],
         bullets: [
-          "Replaced manual salon bookings with a **multi-tenant FastAPI platform** driving a webhook-based WhatsApp bot.",
-          "Implemented conversational flows, appointment booking, reminders and state management for real-time customer interaction.",
-          "Built campaign generation, ad and content creation, and customer-insight engines on **LangChain with Gemini and OpenAI**.",
-          "Connected Redis, PostgreSQL, S3 and WhatsApp/Meta services for production-ready automation on Docker and Fly.io.",
+          "**Multi-tenant FastAPI platform** replacing manual salon bookings with a webhook WhatsApp bot.",
+          "**Conversational flows.** Booking, reminders and state management in real time.",
+          "**AI engines.** Campaign, ad-content and customer-insight generation on LangChain with Gemini and OpenAI.",
+          "**Production wiring.** Redis, PostgreSQL, S3 and Meta services on Docker and Fly.io.",
         ],
       },
     ],
@@ -115,36 +150,49 @@ export const experience: Job[] = [
     role: "Software Engineer, Founding Team",
     dates: "Mar 2025 — Feb 2026",
     location: "Remote",
-    summary:
-      "I joined as the second engineer, with the rest of the team doing AI research. Over time I led the product team and owned architecture and infrastructure, acting as the first point of contact between the CEO and engineering.",
+    summary: "Second engineer on the founding team. Grew into product lead, owning architecture and infra.",
     projects: [
       {
         name: "Face Effects",
-        summary:
-          "A VFX product that ages and de-ages subjects in images and video using in-house GAN models.",
+        summary: "VFX product that ages and de-ages faces in images and video with in-house GAN models.",
         stack: ["FastAPI", "Redis RQ", "Docker", "PyTorch", "Azure", "ffmpeg"],
+        headline: { value: "200x", label: "faster inference, 2s to 0.01s" },
+        arch: [
+          { label: "Client", kind: "edge" },
+          { label: "nginx sticky", kind: "edge" },
+          { label: "FastAPI", kind: "compute" },
+          { label: "Redis RQ + DLQ", kind: "queue" },
+          { label: "GPU workers x10", kind: "compute" },
+          { label: "Azure Blob", kind: "store" },
+        ],
         bullets: [
-          "Architected a distributed GPU inference platform across **10 GPU VMs (160GB VRAM)**, supporting **40 concurrent video runs** at a peak of **50 requests/sec**.",
-          "Cut per-image inference from **2s to ~0.01s** by profiling model timings and removing redundant image-to-byte conversions.",
-          "Replaced the Flask monolith with an async FastAPI queue and ML-worker architecture on Redis RQ, with dead-letter queues for failure analysis.",
-          "Diagnosed a production memory leak with GNU Debugger, a PyTorch pointer deallocation across shared threads, eliminating runtime crashes as the platform scaled to **5,000 users**.",
-          "Extended codec support to **7 formats** via ffmpeg and H.264 handling, fixing empty containers and rotation issues from misaligned encoding tags.",
-          "Led the **GCP to Azure migration** including Azure Blob Storage, and cut idle GPU spend by reaping orphaned processes on client disconnect.",
-          "Shipped temporal-consistency processing and mid-frame streaming with progress percentages, behind custom nginx sticky-connection configs.",
+          "**Distributed GPU platform.** 10 VMs (160GB VRAM), 40 concurrent video runs, 50 req/s peak.",
+          "**2s to ~0.01s** per image by profiling and removing redundant byte conversions.",
+          "**Async re-architecture.** Flask monolith replaced by FastAPI queue and ML workers with dead-letter queues.",
+          "**Memory leak found with GDB.** PyTorch pointer dealloc across shared threads, fixed at 5,000 users.",
+          "**GCP to Azure migration**, and idle GPU spend cut by reaping orphaned processes on disconnect.",
+          "**Codec support for 7 formats** via ffmpeg and H.264, plus temporal consistency and mid-frame streaming.",
         ],
       },
       {
         name: "WeClick",
-        summary:
-          "Group photo generation app for iOS and Android, putting people in photos with celebrities and distant or departed family. 80K users over its lifetime.",
+        summary: "Group-photo app on iOS and Android that puts you in a photo with anyone.",
         stack: ["FastAPI", "Supabase", "Azure Container Apps", "Flux-fill", "OpenCV"],
+        headline: { value: "80K", label: "users at launch" },
+        arch: [
+          { label: "iOS / Android", kind: "edge" },
+          { label: "FastAPI", kind: "compute" },
+          { label: "Azure Storage Queue + DLQ", kind: "queue" },
+          { label: "Autoscaled workers", kind: "compute" },
+          { label: "Supabase / Blob", kind: "store" },
+        ],
         bullets: [
-          "**Sole backend owner**: data models, architecture and storage, authentication, and an in-app credit system wired to the iOS and Android payment SDKs.",
-          "Designed an autoscaling inference queue-worker architecture on Azure Container Apps for the **80K-user launch**.",
-          "Cut deployment time from **10 minutes to 2** by optimizing Docker containers and pipelines, and tuned container sizing out of runtime crashes.",
-          "Built safeguards and DLQs around Azure Storage Queue requeue policies that were causing duplicate queueing.",
-          "Deployed AI microservices for relighting and image scaling, integrated back into the ML inference workers.",
-          "Built an internal analytics dashboard with index-optimised queries over user prompt and image data.",
+          "**Sole backend owner.** Data models, auth, storage and an in-app credit system on the payment SDKs.",
+          "**Autoscaling inference workers** on Azure Container Apps for the 80K-user launch.",
+          "**Deploys 10 min to 2 min** by optimizing Docker images and pipelines.",
+          "**Duplicate-queue safeguards** and DLQs around Azure Storage Queue requeue policy.",
+          "**AI microservices** for relighting and image scaling wired into the inference workers.",
+          "**Analytics dashboard** with index-optimised queries over prompt and image data.",
         ],
       },
     ],
@@ -156,19 +204,18 @@ export const experience: Job[] = [
     dates: "Nov 2024 — Feb 2025",
     location: "Remote, India",
     summary:
-      "Backend work on client products, handling public sites and internal admin dashboards.",
+      "Backend work on client sites and internal admin dashboards.",
     projects: [
       {
         name: "Trishan Music School",
         url: "https://www.trishanschool.com/",
-        summary:
-          "Public website and internal admin dashboard for a Bangalore-based music school.",
+        summary: "Public site and admin dashboard for a Bangalore music school.",
         stack: ["Python", "AWS S3", "Google Calendar", "WhatsApp API"],
+        headline: { value: "1-click", label: "student-to-class assignment" },
         bullets: [
-          "Built a job application management system end-to-end: a **state machine** covering submission, interview scheduling and hire.",
-          "Added S3 storage for resumes, performance videos and profile photos.",
-          "Integrated Google Calendar scheduling and WhatsApp notifications for applicants and interviewers, replacing a manual hiring workflow.",
-          "Streamlined class scheduling in the admin dashboard, cutting a multi-step Google Calendar workflow to **one-click student-to-class assignment**.",
+          "**Hiring state machine.** Submission, interview scheduling and hire, built end-to-end.",
+          "**Integrations.** S3 for resumes and videos, Google Calendar and WhatsApp notifications.",
+          "**One-click class assignment** replacing a multi-step Calendar workflow.",
         ],
       },
     ],
@@ -181,10 +228,18 @@ export const projects: Project[] = [
     url: "https://github.com/KausTarafdar/Arbitor",
     summary: "Self-hosted API gateway with service discovery and health-aware failover.",
     stack: ["JavaScript", "Docker", "REST"],
+    headline: { value: "30+", label: "unit and integration tests" },
+    arch: [
+      { label: "Client", kind: "edge" },
+      { label: "Gateway + auth", kind: "compute" },
+      { label: "Consistent-hash LB", kind: "compute" },
+      { label: "Health checks", kind: "queue" },
+      { label: "Registered services", kind: "store" },
+    ],
     bullets: [
-      "Built **consistent-hash load balancing**, dynamic routing and health-aware failover across registered services.",
-      "Added authentication, structured logging and Docker deployment.",
-      "Covered the routing and balancing paths with **30+ unit and integration tests**.",
+      "**Consistent-hash load balancing**, dynamic routing and health-aware failover.",
+      "**Auth, structured logging** and Docker deployment.",
+      "**30+ tests** across routing and balancing paths.",
     ],
   },
   {
@@ -193,8 +248,8 @@ export const projects: Project[] = [
     summary: "URL shortening platform with custom aliases and click analytics.",
     stack: ["PostgreSQL", "REST", "QR"],
     bullets: [
-      "Supports custom aliases and QR code generation per short link.",
-      "Tracks click analytics with **frequency and recency scoring** in PostgreSQL.",
+      "**Custom aliases** and QR code per short link.",
+      "**Click analytics** with frequency and recency scoring in PostgreSQL.",
     ],
   },
 ];
@@ -209,57 +264,38 @@ export const education = {
 
 export const skills = [
   {
-    group: "Backend & Data",
+    group: "Languages",
+    sigil: "{}",
+    items: ["Python", "TypeScript", "JavaScript", "SQL"],
+  },
+  {
+    group: "Backend & Frameworks",
+    sigil: "::",
+    items: ["FastAPI", "Node.js", "Express", "Django", "REST", "Webhooks"],
+  },
+  {
+    group: "Distributed Systems & Storage",
+    sigil: "<>",
     items: [
-      "Python",
-      "TypeScript",
-      "FastAPI",
-      "Node.js",
-      "Express",
-      "Django",
-      "PostgreSQL",
       "Redis",
+      "Redis RQ",
+      "BullMQ",
+      "Azure Storage Queue",
+      "PostgreSQL",
       "MongoDB",
       "Supabase",
+      "Multi-tenancy",
+      "Event-driven",
     ],
   },
   {
-    group: "AI & Inference",
-    items: [
-      "LangChain",
-      "OpenAI",
-      "Gemini",
-      "PyTorch",
-      "GPU Orchestration",
-      "Inference Pipelines",
-      "LLM Agents",
-    ],
+    group: "Cloud & Infra",
+    sigil: "~/",
+    items: ["Docker", "Azure", "AWS", "GCP", "Fly.io", "Nginx", "GitHub Actions", "New Relic", "Papertrail"],
   },
   {
-    group: "Infrastructure",
-    items: [
-      "Docker",
-      "GitHub Actions",
-      "Azure",
-      "AWS",
-      "GCP",
-      "Fly.io",
-      "Nginx",
-      "Linux",
-      "New Relic",
-      "Papertrail",
-    ],
-  },
-  {
-    group: "Architecture",
-    items: [
-      "Distributed Systems",
-      "Message Queues",
-      "Event-Driven",
-      "Multi-Tenancy",
-      "Microservices",
-      "API Design",
-      "Performance",
-    ],
+    group: "AI Orchestration",
+    sigil: "AI",
+    items: ["PyTorch", "LangChain", "OpenAI", "Gemini", "LLM Agents", "GPU Orchestration", "Inference Pipelines"],
   },
 ];

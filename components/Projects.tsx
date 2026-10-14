@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { projects } from "@/data/content";
-import Bullet from "./Bullet";
+import CaseCard from "./CaseCard";
 import Squiggle from "./Squiggle";
 
 export default function Projects() {
@@ -11,31 +11,13 @@ export default function Projects() {
         side <span className="accent-word">projects<Squiggle /></span>
       </h2>
       <p className="section-intro">
-        Personal projects, built outside of work. For the production systems I&apos;ve shipped,
-        see <Link href="/experience">experience</Link>.
+        Built outside of work. Production systems live under <Link href="/experience">experience</Link>.
       </p>
-
-      {projects.map((project) => (
-        <div className="standalone-project" key={project.name}>
-          <div className="project-head">
-            <span className="project-name">{project.name}</span>
-            {project.url && (
-              <span className="project-links">
-                <a href={project.url} target="_blank" rel="noreferrer">
-                  Source ↗
-                </a>
-              </span>
-            )}
-          </div>
-          <p className="project-summary">{project.summary}</p>
-          <div className="stack-line">{project.stack.join(" / ")}</div>
-          <ul className="bullets">
-            {project.bullets.map((b) => (
-              <Bullet key={b} text={b} />
-            ))}
-          </ul>
-        </div>
-      ))}
+      <div className="case-grid">
+        {projects.map((p) => (
+          <CaseCard project={p} key={p.name} />
+        ))}
+      </div>
     </section>
   );
 }

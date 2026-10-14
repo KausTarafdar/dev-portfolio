@@ -1,5 +1,5 @@
 import { experience } from "@/data/content";
-import Bullet from "./Bullet";
+import CaseCard from "./CaseCard";
 import Squiggle from "./Squiggle";
 
 export default function Experience() {
@@ -10,43 +10,34 @@ export default function Experience() {
         where I&apos;ve <span className="accent-word">worked<Squiggle /></span>
       </h2>
 
-      {experience.map((job) => (
-        <div className="job" key={job.company}>
-          <div className="job-meta">
-            <span>{job.dates}</span>
-            <span>{job.location}</span>
-          </div>
-          <a className="job-company" href={job.url} target="_blank" rel="noreferrer">
-            {job.company} <span className="arrow">↗</span>
-          </a>
-          <div className="job-role">{job.role}</div>
-          <p className="job-summary">{job.summary}</p>
-
-          <div className="project-list">
-            {job.projects.map((project) => (
-              <div className="project-block" key={project.name}>
-                <div className="project-head">
-                  <span className="project-name">{project.name}</span>
-                  {project.url && (
-                    <span className="project-links">
-                      <a href={project.url} target="_blank" rel="noreferrer">
-                        Source ↗
-                      </a>
-                    </span>
-                  )}
-                </div>
-                <p className="project-summary">{project.summary}</p>
-                <div className="stack-line">{project.stack.join(" / ")}</div>
-                <ul className="bullets">
-                  {project.bullets.map((b) => (
-                    <Bullet key={b} text={b} />
-                  ))}
-                </ul>
+      <ol className="timeline">
+        {experience.map((job) => (
+          <li className="job" key={job.company}>
+            <span className="timeline-dot" aria-hidden="true" />
+            <div className="job-meta">
+              <span>{job.dates}</span>
+              <span>{job.location}</span>
+            </div>
+            <div className="job-title">
+              <span className="company-badge" aria-hidden="true">
+                {job.company[0]}
+              </span>
+              <div>
+                <a className="job-company" href={job.url} target="_blank" rel="noreferrer">
+                  {job.company} <span className="arrow">↗</span>
+                </a>
+                <div className="job-role">{job.role}</div>
               </div>
-            ))}
-          </div>
-        </div>
-      ))}
+            </div>
+            <p className="job-summary">{job.summary}</p>
+            <div className="case-grid">
+              {job.projects.map((p) => (
+                <CaseCard project={p} key={p.name} />
+              ))}
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

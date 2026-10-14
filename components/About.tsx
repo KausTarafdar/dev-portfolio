@@ -1,13 +1,8 @@
-import Link from "next/link";
-import { experience, featured, profile } from "@/data/content";
-import CaseCard from "./CaseCard";
+import { profile } from "@/data/content";
 import StackChips from "./StackChips";
 import StatsBar from "./StatsBar";
 
 export default function About() {
-  const all = experience.flatMap((j) => j.projects);
-  const picks = featured.map((n) => all.find((p) => p.name === n)!);
-
   return (
     <section>
       <div className="breadcrumb">~/about</div>
@@ -27,16 +22,6 @@ export default function About() {
       </p>
 
       <StatsBar />
-
-      <h2 className="block-title">selected work</h2>
-      <div className="case-grid">
-        {picks.map((p) => (
-          <CaseCard project={p} key={p.name} />
-        ))}
-      </div>
-      <p className="more">
-        <Link href="/experience">Full experience timeline →</Link>
-      </p>
 
       <h2 className="block-title">stack</h2>
       <StackChips />

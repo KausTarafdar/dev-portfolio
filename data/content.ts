@@ -44,8 +44,6 @@ export const metrics = [
   { value: "10", label: "GPU VMs orchestrated" },
 ];
 
-export const featured = ["Face Effects", "WeClick", "Gomotto"];
-
 export const socials = [
   { label: "email", href: "mailto:kaustarafdar@gmail.com" },
   { label: "github", href: "https://github.com/KausTarafdar" },

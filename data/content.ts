@@ -152,7 +152,7 @@ export const experience: Job[] = [
     projects: [
       {
         name: "Face Effects",
-        url: "https://www.yonderwonder.ai",
+        url: "https://yonderwonder.ai/media/",
         summary: "VFX product that ages and de-ages faces in images and video with in-house GAN models.",
         stack: ["FastAPI", "Redis RQ", "Docker", "PyTorch", "Azure", "ffmpeg"],
         headline: { value: "200x", label: "faster inference, 2s to 0.01s" },

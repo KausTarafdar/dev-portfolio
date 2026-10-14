@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const mono = JetBrains_Mono({
@@ -37,7 +38,10 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body className={`${mono.variable} ${sans.variable}`}>{children}</body>
+      <body className={`${mono.variable} ${sans.variable}`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

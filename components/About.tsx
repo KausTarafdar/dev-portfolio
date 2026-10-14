@@ -19,7 +19,7 @@ export default function About() {
       </div>
       <div className="about-copy">
         <p>
-          right now, i&apos;m building <span className="highlight">{profile.focus}</span> at{" "}
+          Currently engineering distributed backend platforms and integration pipelines at{" "}
           <a className="company" href={profile.current.url} target="_blank" rel="noreferrer">
             {profile.current.company}
           </a>
